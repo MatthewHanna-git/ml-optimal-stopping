@@ -1,0 +1,7 @@
+# Install PyTorch with CUDA first (see README):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu126
+# The sweep and the diagnostics ran under torch 2.13.0+cu126, Python 3.12.
+torch>=2.2
+numpy>=1.26
+pandas>=2.0        # make_section6_exhibits.py, make_diag_exhibits.py
+matplotlib>=3.8    # make_section6_exhibits.py (Fig. 6.1), convergence_plot.py

@@ -1,0 +1,16 @@
+.idea/
+.venv/
+venv/
+__pycache__/
+*.pyc
+checkpoints/
+.Rhistory
+_archive/
+
+# Results are tracked (the CSVs and results/section6 back the thesis);
+# trained networks and smoke-test output are not.
+results/nets/
+results/nets_diag/
+results/nets_smoke/
+results/nets_diag_smoke/
+results/smoke_*.csv
