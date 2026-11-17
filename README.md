@@ -1,7 +1,8 @@
 # ml-optimal-stopping
 
-Code for the UNSW Master of Financial Mathematics thesis *Machine Learning
-for Optimal Stopping*. Eight methods for pricing a Bermudan max-call are
+Code for the UNSW Master of Financial Mathematics thesis *A Certified
+Benchmark of Machine Learning Methods for Pricing High-Dimensional American
+Options*. Eight methods for pricing a Bermudan max-call are
 reimplemented in one codebase. Each is reduced to an exercise policy, and
 each policy is certified by the Andersen–Broadie interval across
 dimensions d = 2 to 50.
@@ -57,6 +58,11 @@ The tables and figures in the thesis are built from the CSVs in `results/`.
 | `run_diag_rl_budget.py` | `diag_rl_budget.csv` | Dai, Chee and Dianetti at a doubled budget, d = 20 |
 | `run_diag_seed_arm.py` | `diag_seed_arm.csv` | Five extra training seeds for LSM, NN-LSM, RDBDP and DOS at d = 10, 50 |
 | `run_diag_seed_arm_rl.py` | `diag_seed_arm_rl.csv` | Five extra training seeds for Dong, Dai, Chee and Dianetti at d = 10, 50 |
+| `run_diag_sorted_inputs.py` | `diag_sorted_inputs.csv` | NN-LSM and DOS with the prices sorted before the network |
+| `run_diag_sorted_seeds.py` | `diag_sorted_seeds.csv` | The sorted networks on the seed arm's five seeds, d = 10, 50 |
+| `run_diag_generic_lsm.py` | `diag_generic_lsm.csv` | LSM on a generic polynomial basis in place of its sorted one |
+| `run_diag_generic_seeds.py` | `diag_generic_seeds.csv` | The generic-basis LSM on the seed arm's five seeds, d = 10, 50 |
+| `run_diag_asymmetric.py` | `diag_asymmetric.csv` | The structure test on the asymmetric max-call of Becker et al. (2019, Table 2) |
 
 The diagnostics change no sweep cell. Trained networks are saved to
 `results/nets/` and `results/nets_diag/` (not tracked). Each of these
@@ -85,6 +91,8 @@ Sweep cell c = 0, …, 143 (ordered by method, then d, then S0) trains from
 s = 10⁶ + 10⁴c. The RL randomised evaluation draws from s + 3, and
 certification draws its lower-bound paths from s + 7919 and its outer and
 inner paths from s + 7920. No two streams of the sweep coincide
-(`run_sweep.py` asserts this at startup). The budget and temperature
-diagnostics reuse the seed of the sweep cell they revisit; the seed arms
-use their own seed blocks, given in their docstrings.
+(`run_sweep.py` asserts this at startup). The budget, temperature, sorted-input
+and generic-basis diagnostics reuse the seed of the sweep cell they revisit.
+The seed arms use their own seed blocks, given in their docstrings, which
+the sorted and generic seed runs share draw for draw. The asymmetric test
+uses its own block from 5 × 10⁶.
